@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter to My Love ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+         body {
+            font-family: 'Georgia', serif;
+            background: #f5e6d3;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .heart {
+            font-size: 2em;
+            color: #e74c3c;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .letter-intro {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .question-container {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .question-container.active {
+            display: block;
+        }
+
+    
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(-10px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .question {
+            color: #333;
+            font-size: 1.3em;
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .option-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .option-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .final-message {
+            display: none;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .final-message.active {
+            display: block;
+        }
+
+        .final-text {
+            color: #555;
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 30px 0;
+        }
+
+        .photo-upload {
+            margin: 30px 0;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .file-input-label:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .photo-preview {
+            margin: 20px 0;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-preview img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .restart-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        .restart-btn:hover {
+            background: #7f8c8d;
+            transform: translateY(-3px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #ecf0f1;
+            border-radius: 2px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .copy-feedback {
+            color: #27ae60;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+     <!-- BACKGROUND PHOTOS -->
+    <div style="position: fixed; top: 40px; left: 40px; width: 200px; height: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 1;">
+        <img src="https://imgur.com/SN4rcK0.jpg" alt="Memory 1" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <div style="position: fixed; top: 40px; right: 40px; width: 200px; height: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 1;">
+        <img src="https://imgur.com/N7QDZUU.jpg" alt="Memory 2" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <div style="position: fixed; bottom: 40px; left: 40px; width: 200px; height: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 1;">
+        <img src="https://imgur.com/SDHC9Ia.jpg" alt="Memory 3" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <div style="position: fixed; bottom: 40px; right: 40px; width: 200px; height: 200px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 1;">
+        <img src="https://imgur.com/uTRb1Tp.jpg" alt="Memory 4" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+        <!-- BACKGROUND MUSIC -->
+    <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; background: white; padding: 15px 25px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">
+        <audio id="bgMusic" controls style="width: 250px;">
+            <source src="https://raw.githubusercontent.com/omarfernandez2917-sketch/song/main/Poror%C3%B3%20-%20La%202da.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1>Mi valentin lin lin <span class="heart">❤️</span></h1>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div class="letter-intro">
+            <p>Ling ling,</p>
+            <p>Aqui ta la Omi trivia de nuestra relacion..</p>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="question-container active" id="q1">
+            <div class="question">Donde fue nuestra primera cita?</div>
+            <div class="options">
+                <button class="option-btn" onclick="answerQuestion(1, 'Cena en applebees')">Cena en applebees</button>
+                <button class="option-btn" onclick="answerQuestion(1, 'Pelicula en el cine')">Pelicula en el cine</button>
+                <button class="option-btn" onclick="answerQuestion(1, 'El Acuario')">EL Acuario</button>
+                <button class="option-btn" onclick="answerQuestion(1, 'Knife kitchen')">Knife kitchen</button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-container" id="q2">
+            <div class="question">Que es lo que mas me gusta de ti?</div>
+            <div class="options">
+                <button class="option-btn" onclick="answerQuestion(2, 'Tu sentido del humor')">Tu sentido del humor</button>
+                <button class="option-btn" onclick="answerQuestion(2, 'Tu actitud cuando estas feliz')">Tu actitud cuando estas feliz</button>
+                <button class="option-btn" onclick="answerQuestion(2, 'Tu corazon')">Tu corazon</button>
+                <button class="option-btn" onclick="answerQuestion(2, 'Todas las anteriores')">Todas las anteriores</button>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-container" id="q3">
+            <div class="question">Cual fue nuestro primer viaje juntos?</div>
+            <div class="options">
+                <button class="option-btn" onclick="answerQuestion(3, 'Punta cana')">Punta cana</button>
+                <button class="option-btn" onclick="answerQuestion(3, 'Jarabacoa')">Jarabacoa</button>
+                <button class="option-btn" onclick="answerQuestion(3, 'Marbella')">Marbella</button>
+                <button class="option-btn" onclick="answerQuestion(3, 'Bayahibe')">Bayahibe</button>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-container" id="q4">
+            <div class="question">Puedes adivinar, cual es mi noche favorita juntos?</div>
+            <div class="options">
+                <button class="option-btn" onclick="answerQuestion(4, 'Marbella con noche de peliculas, vino y pasta')">Marbella con noche de peliculas, vino y pasta</button>
+                <button class="option-btn" onclick="answerQuestion(4, 'Jarabacoa con noche de Game of thrones')">Jarabacoa con noche de Game of thrones</button>
+                <button class="option-btn" onclick="answerQuestion(4, 'Valencia noche de hotel')">Valencia noche de hotel y churros</button>
+                <button class="option-btn" onclick="answerQuestion(4, 'El primer san valentin')">El primer san valentin</button>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-container" id="q5">
+            <div class="question">Sabes en que dia mis padres dijeron por primera vez, "Wao, Aileen es una buena muchacha"</div>
+            <div class="options">
+                <button class="option-btn" onclick="answerQuestion(5, 'Cuando te vieron ganar el premio en youtube')">Cuando te vieron ganar el premio en youtube</button>
+                <button class="option-btn" onclick="answerQuestion(5, 'Cuando fuimos a cocinar risotto con los cortes')">Cuando fuimos a cocinar risotto con los cortes</button>
+                <button class="option-btn" onclick="answerQuestion(5, 'Cuando visitaste la primera vez despues de volver de milan')">Cuando visitaste la primera vez despues de volver de milan</button>
+                <button class="option-btn" onclick="answerQuestion(5, 'Ninguna de las anteriores, el dia que te conocieron')">Ninguna de las anteriores, el dia que te conocieron</button>
+            </div>
+        </div>
+
+        <!-- Final Section -->
+        <div class="final-message" id="final">
+            <div class="final-text">
+                <p>Baby ling, no todos los momentos son de gloria, ni perfectos, yo te amo y te adoro desde que nos conocimos, estoy emocionado de que podamos seguir adelante con respeto y amor, Espero que en el pequeño infinito que tenemos en esta vida podamos hacerla valer </p>
+                <p style="margin-top: 20px;"></p>
+            </div>
+
+                       <!-- PERMANENT PHOTO WITH TEXT -->
+            <div style="margin: 30px 0;">
+                <p style="color: #555; margin-bottom: 15px;">P.S Aqui esta una de mis fotos favoritas de ti de las que tiro en secreto:</p>
+                <div style="position: relative; width: 100%; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);">
+                    <img id="permanentPhoto" src="https://imgur.com/J5vGUnk.jpg" alt="My favorite photo of you" style="width: 100%; display: block; border-radius: 10px;">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); display: flex; justify-content: center; align-items: center; padding: 20px; text-align: center;">
+                        <p style="color: white; font-size: 1.3em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); line-height: 1.5;"></p>
+                    </div>
+           
+                <div class="copy-feedback" id="feedback"></div>
+            </div>
+
+            <button class="restart-btn" onclick="restartJourney()">← Start Over</button>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 5;
+        let answers = {};
+        let uploadedPhotoUrl = null;
+
+                // Correct answers for each question
+        const correctAnswers = {
+            1: 'Pelicula en el cine',
+            2: 'Todas las anteriores',
+            3: 'Marbella',
+            4: 'Marbella con noche de peliculas, vino y pasta',
+            5: 'Ninguna de las anteriores, el dia que te conocieron'
+        };
+
+        function answerQuestion(questionNum, answer) {
+            answers[`q${questionNum}`] = answer;
+            updateProgress();
+
+            // Show correct/incorrect message
+            const isCorrect = answer === correctAnswers[questionNum];
+            showAnswerFeedback(questionNum, isCorrect, correctAnswers[questionNum]);
+
+            // Disable all buttons for this question
+            const buttons = document.querySelectorAll(`#q${questionNum} .option-btn`);
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.opacity = '0.6';
+                btn.style.cursor = 'not-allowed';
+            });
+
+            // Show next question after 2 seconds
+            setTimeout(() => {
+                // Hide current question
+                document.getElementById(`q${questionNum}`).classList.remove('active');
+
+                // Show next question or final message
+                if (questionNum < totalQuestions) {
+                    currentQuestion = questionNum + 1;
+                    document.getElementById(`q${currentQuestion}`).classList.add('active');
+                } else {
+                    document.getElementById('final').classList.add('active');
+                }
+            }, 2000);
+        }
+
+        function showAnswerFeedback(questionNum, isCorrect, correctAnswer) {
+            const questionContainer = document.getElementById(`q${questionNum}`);
+            const feedbackDiv = document.createElement('div');
+            feedbackDiv.style.cssText = `
+                margin-top: 20px;
+                padding: 15px;
+                border-radius: 8px;
+                font-weight: bold;
+                font-size: 1.1em;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            if (isCorrect) {
+                feedbackDiv.style.background = '#d4edda';
+                feedbackDiv.style.color = '#155724';
+                feedbackDiv.style.border = '2px solid #28a745';
+                feedbackDiv.innerHTML = '✓ ¡Correcto! 🎉';
+            } else {
+                feedbackDiv.style.background = '#f8d7da';
+                feedbackDiv.style.color = '#721c24';
+                feedbackDiv.style.border = '2px solid #f5c6cb';
+                feedbackDiv.innerHTML = `✗ Incorrecto<br><p style="font-size: 0.9em; margin-top: 10px;">La respuesta correcta es:<br><strong>${correctAnswer}</strong></p>`;
+            }
+            
+            questionContainer.appendChild(feedbackDiv);
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function previewPhoto() {
+            const fileInput = document.getElementById('photoInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedPhotoUrl = e.target.result;
+                    const photoPreview = document.getElementById('photoPreview');
+                    photoPreview.innerHTML = `<img src="${uploadedPhotoUrl}" alt="Our photo">`;
+                    document.getElementById('shareSection').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function downloadAsImage() {
+            if (!uploadedPhotoUrl) {
+                alert('Please upload a photo first!');
+                return;
+            }
+
+            // Create a canvas to combine text and image
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+
+            img.onload = function() {
+                canvas.width = 800;
+                canvas.height = 1000;
+
+                // Add gradient background
+                const gradient = ctx.createLinearGradient(0, 0, 800, 1000);
+                gradient.addColorStop(0, '#667eea');
+                gradient.addColorStop(1, '#764ba2');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Add white box
+                ctx.fillStyle = 'white';
+                ctx.fillRect(40, 40, 720, 920);
+
+                // Add title
+                ctx.fillStyle = '#764ba2';
+                ctx.font = 'bold 40px Georgia';
+                ctx.textAlign = 'center';
+                ctx.fillText('A Letter to My Love ❤️', 400, 80);
+
+                // Add photo
+                ctx.drawImage(img, 100, 120, 600, 400);
+
+                // Add text
+                ctx.fillStyle = '#555';
+                ctx.font = '18px Georgia';
+                ctx.textAlign = 'center';
+                const textY = 560;
+                ctx.fillText('This love letter journey captures', 400, textY);
+                ctx.fillText('the essence of our beautiful bond.', 400, textY + 30);
+
+                // Download
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'love-letter.png';
+                link.click();
+            };
+
+            img.src = uploadedPhotoUrl;
+        }
+
+        function shareToClipboard() {
+            const text = `I just completed "A Letter to My Love" - an interactive love letter! Take the journey and see where we end up. ❤️ Check it out!`;
+            navigator.clipboard.writeText(text).then(() => {
+                const feedback = document.getElementById('feedback');
+                feedback.textContent = '✓ Copied to clipboard!';
+                setTimeout(() => {
+                    feedback.textContent = '';
+                }, 2000);
+            });
+        }
+
+        function shareToSocial(platform) {
+            const text = `I just completed "A Letter to My Love" - an interactive love letter! ❤️`;
+            const urls = {
+                facebook: `https://www.facebook.com/sharer/sharer.php?quote=${encodeURIComponent(text)}`,
+                twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`
+            };
+
+            if (urls[platform]) {
+                window.open(urls[platform], '_blank', 'width=600,height=400');
+            }
+        }
+               function restartJourney() {
+            currentQuestion = 1;
+            answers = {};
+            uploadedPhotoUrl = null;
+
+            // Reset all questions
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionDiv = document.getElementById(`q${i}`);
+                questionDiv.classList.remove('active');
+                
+                // Re-enable all buttons
+                const buttons = questionDiv.querySelectorAll('.option-btn');
+                buttons.forEach(btn => {
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                });
+                
+                // Remove feedback messages
+                const feedbacks = questionDiv.querySelectorAll('div[style*="background"]');
+                feedbacks.forEach(fb => {
+                    if (fb.style.background && (fb.style.background.includes('edda') || fb.style.background.includes('d7da'))) {
+                        fb.remove();
+                    }
+                });
+            }
+            document.getElementById('q1').classList.add('active');
+            document.getElementById('final').classList.remove('active');
+            document.getElementById('photoPreview').innerHTML = '';
+            document.getElementById('shareSection').style.display = 'none';
+            document.getElementById('photoInput').value = '';
+            document.getElementById('feedback').textContent = '';
+
+            updateProgress();
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
